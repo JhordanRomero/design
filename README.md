@@ -1,2 +1,2 @@
-# jromerorebolledo
+# diseño
 Portafolio y CV
