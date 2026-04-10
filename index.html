@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jhordan Romero | Diseñador & Director Creativo</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,100;0,300;0,400;0,700;0,900;1,300;1,900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            bg: '#050505',      /* Deep Black */
+                            card: '#0a0a0a',    /* Slightly lighter black */
+                            neon: '#ccff00',    /* Electric/Neon Green */
+                            surface: '#111111'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Kinetic Typography Animations */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes marquee-reverse {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+
+        .animate-marquee {
+            animation: marquee 25s linear infinite;
+        }
+        .animate-marquee-reverse {
+            animation: marquee-reverse 30s linear infinite;
+        }
+
+        /* Kinetic Text Stroke */
+        .text-outline {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08);
+            color: transparent;
+        }
+        .text-outline-neon {
+            -webkit-text-stroke: 1px rgba(204, 255, 0, 0.15);
+            color: transparent;
+        }
+
+        /* Custom Interactive Elements */
+        .kinetic-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .kinetic-btn::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background-color: #ccff00;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: -1;
+        }
+        .kinetic-btn:hover::before {
+            height: 100%;
+        }
+        .kinetic-btn:hover {
+            color: #050505 !important;
+            border-color: #ccff00;
+        }
+        .kinetic-btn:hover svg {
+            color: #050505 !important;
+        }
+
+        /* Accordion Layout */
+        .accordion-item {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .accordion-item:hover {
+            border-color: rgba(204, 255, 0, 0.5);
+            background: rgba(204, 255, 0, 0.02);
+        }
+        
+        .preview-wrapper {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .preview-wrapper.active {
+            max-height: 900px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; }
+        ::-webkit-scrollbar-thumb:hover { background: #ccff00; }
+    </style>
+</head>
+<body class="relative min-h-screen overflow-x-hidden selection:bg-brand-neon selection:text-black">
+
+    <!-- Kinetic Typography Background (Motion) -->
+    <div class="fixed inset-0 z-0 pointer-events-none flex flex-col justify-between py-10 opacity-70 overflow-hidden">
+        <div class="flex w-[200%] animate-marquee">
+            <h2 class="text-[12vw] font-black uppercase text-outline whitespace-nowrap leading-none tracking-tighter">
+                DIRECTOR CREATIVO <span class="mx-8 text-outline-neon">DISEÑADOR</span> DIRECTOR CREATIVO <span class="mx-8 text-outline-neon">DISEÑADOR</span> DIRECTOR CREATIVO
+            </h2>
+        </div>
+        <div class="flex w-[200%] animate-marquee-reverse">
+            <h2 class="text-[12vw] font-black uppercase text-outline whitespace-nowrap leading-none tracking-tighter">
+                <span class="mx-8 text-outline-neon">UI/UX</span> BRANDING <span class="mx-8 text-outline-neon">PORTAFOLIO</span> ESTÉTICA <span class="mx-8 text-outline-neon">VISUAL</span> BRANDING <span class="mx-8 text-outline-neon">PORTAFOLIO</span>
+            </h2>
+        </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <main class="relative z-10 w-full min-h-screen flex items-center justify-center p-4 sm:p-8">
+        
+        <!-- Center Box / Terminal Style -->
+        <div class="w-full max-w-2xl bg-brand-bg/60 backdrop-blur-xl border border-white/10 p-8 sm:p-12 relative">
+            
+            <!-- Deco corner elements -->
+            <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-brand-neon"></div>
+            <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-brand-neon"></div>
+
+            <!-- Header -->
+            <header class="mb-12">
+                <h1 class="text-6xl sm:text-8xl uppercase tracking-tighter leading-[0.85] mb-6">
+                    <span class="font-black text-white block mb-2">Jhordan</span>
+                    <span class="font-light italic text-brand-neon">Romero</span>
+                </h1>
+                
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border-b border-white/10 pb-8">
+                    <!-- Title -->
+                    <h2 class="text-sm font-medium tracking-[0.3em] uppercase text-white/50 flex flex-col gap-1">
+                        <span>Diseñador</span>
+                        <span class="text-brand-neon">Director Creativo</span>
+                    </h2>
+
+                    <!-- Contact Buttons -->
+                    <div class="flex flex-col gap-3">
+                        <a href="mailto:jbromero1@uc.cl" class="kinetic-btn inline-flex items-center gap-3 px-5 py-2.5 border border-white/20 text-xs font-bold uppercase tracking-wider text-white z-10">
+                            <i data-lucide="mail" class="w-4 h-4 text-white"></i>
+                            jbromero1@uc.cl
+                        </a>
+                        <a href="https://wa.me/56985889548" target="_blank" class="kinetic-btn inline-flex items-center gap-3 px-5 py-2.5 border border-white/20 text-xs font-bold uppercase tracking-wider text-white z-10">
+                            <i data-lucide="message-square" class="w-4 h-4 text-white"></i>
+                            +56 9 8588 9548
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Links Section -->
+            <div class="w-full space-y-4">
+                
+                <!-- CV Item -->
+                <div class="w-full">
+                    <button onclick="togglePreview('cv-preview', this)" class="accordion-item bg-brand-surface w-full p-5 flex items-center justify-between group cursor-pointer">
+                        <div class="flex items-center gap-5">
+                            <div class="text-brand-neon">
+                                <i data-lucide="file-text" class="w-6 h-6"></i>
+                            </div>
+                            <div class="text-left">
+                                <h3 class="text-base font-bold text-white uppercase tracking-wider group-hover:text-brand-neon transition-colors">Currículum Vitae</h3>
+                                <p class="text-xs font-light text-white/40 mt-1">/ Desplegar documento</p>
+                            </div>
+                        </div>
+                        <i data-lucide="arrow-down-right" class="w-5 h-5 text-white/40 group-hover:text-brand-neon transition-transform duration-300 chevron-icon"></i>
+                    </button>
+                    
+                    <!-- CV Preview Container -->
+                    <div id="cv-preview" class="preview-wrapper w-full">
+                        <div class="mt-2 border border-white/10 bg-black flex flex-col relative group/iframe">
+                            <!-- Top Actions Bar -->
+                            <div class="flex items-center justify-between p-3 border-b border-white/10 bg-brand-surface">
+                                <div class="flex items-center gap-2 px-2 opacity-30">
+                                    <div class="w-2 h-2 rounded-full bg-white"></div>
+                                    <div class="w-2 h-2 rounded-full bg-white"></div>
+                                    <div class="w-2 h-2 rounded-full bg-white"></div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <!-- Download Button -->
+                                    <a href="https://drive.google.com/uc?export=download&id=1GQRLykY5O4jLfdDKeYNEL7A4q6JkKjZ1" class="flex items-center gap-2 px-4 py-2 bg-brand-bg border border-white/20 text-white text-xs font-bold uppercase tracking-wider hover:border-brand-neon hover:text-brand-neon transition-all">
+                                        <span>Descargar</span>
+                                        <i data-lucide="download" class="w-3 h-3"></i>
+                                    </a>
+                                    <!-- Drive Button -->
+                                    <a href="https://drive.google.com/file/d/1GQRLykY5O4jLfdDKeYNEL7A4q6JkKjZ1/view?usp=drivesdk" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-brand-neon text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors border border-transparent">
+                                        <span>Drive</span>
+                                        <i data-lucide="external-link" class="w-3 h-3"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <iframe src="https://drive.google.com/file/d/1GQRLykY5O4jLfdDKeYNEL7A4q6JkKjZ1/preview" class="w-full h-[500px] sm:h-[600px] border-none opacity-80 group-hover/iframe:opacity-100 transition-opacity" allow="autoplay"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portafolio Item -->
+                <div class="w-full">
+                    <button onclick="togglePreview('portfolio-preview', this)" class="accordion-item bg-brand-surface w-full p-5 flex items-center justify-between group cursor-pointer">
+                        <div class="flex items-center gap-5">
+                            <div class="text-brand-neon">
+                                <i data-lucide="briefcase" class="w-6 h-6"></i>
+                            </div>
+                            <div class="text-left">
+                                <h3 class="text-base font-bold text-white uppercase tracking-wider group-hover:text-brand-neon transition-colors">Portafolio</h3>
+                                <p class="text-xs font-light text-white/40 mt-1">/ Ver proyectos</p>
+                            </div>
+                        </div>
+                        <i data-lucide="arrow-down-right" class="w-5 h-5 text-white/40 group-hover:text-brand-neon transition-transform duration-300 chevron-icon"></i>
+                    </button>
+                    
+                    <!-- Portfolio Preview Container -->
+                    <div id="portfolio-preview" class="preview-wrapper w-full">
+                        <div class="mt-2 border border-white/10 bg-black flex flex-col relative group/iframe">
+                            <!-- Top Actions Bar -->
+                            <div class="flex items-center justify-between p-3 border-b border-white/10 bg-brand-surface">
+                                <div class="flex items-center gap-2 px-2 opacity-30">
+                                    <div class="w-2 h-2 rounded-full bg-white"></div>
+                                    <div class="w-2 h-2 rounded-full bg-white"></div>
+                                    <div class="w-2 h-2 rounded-full bg-white"></div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <!-- Download Button -->
+                                    <a href="https://drive.google.com/uc?export=download&id=1-5bci3cuv3_91oaJ787eDZYXmodcyOcj" class="flex items-center gap-2 px-4 py-2 bg-brand-bg border border-white/20 text-white text-xs font-bold uppercase tracking-wider hover:border-brand-neon hover:text-brand-neon transition-all">
+                                        <span>Descargar</span>
+                                        <i data-lucide="download" class="w-3 h-3"></i>
+                                    </a>
+                                    <!-- Drive Button -->
+                                    <a href="https://drive.google.com/file/d/1-5bci3cuv3_91oaJ787eDZYXmodcyOcj/view?usp=drivesdk" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-brand-neon text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors border border-transparent">
+                                        <span>Drive</span>
+                                        <i data-lucide="external-link" class="w-3 h-3"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <iframe src="https://drive.google.com/file/d/1-5bci3cuv3_91oaJ787eDZYXmodcyOcj/preview" class="w-full h-[500px] sm:h-[600px] border-none opacity-80 group-hover/iframe:opacity-100 transition-opacity" allow="autoplay"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <footer class="mt-12 text-left border-t border-white/10 pt-6">
+                <p class="text-white/30 text-[10px] font-mono uppercase tracking-widest">&copy; <span id="year"></span> J.R.R. // Todos los derechos reservados.</p>
+            </footer>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        function togglePreview(previewId, btnElement) {
+            const previewContainer = document.getElementById(previewId);
+            const chevron = btnElement.querySelector('.chevron-icon');
+            const isActive = previewContainer.classList.contains('active');
+
+            // Cerrar otros
+            document.querySelectorAll('.preview-wrapper').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelectorAll('.chevron-icon').forEach(icon => {
+                icon.style.transform = 'rotate(0deg)';
+            });
+
+            // Abrir seleccionado
+            if (!isActive) {
+                previewContainer.classList.add('active');
+                // Rotación kinética del ícono
+                chevron.style.transform = 'rotate(135deg)';
+                
+                setTimeout(() => {
+                    const offset = 40;
+                    const elementPosition = btnElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }, 300);
+            }
+        }
+    </script>
+</body>
+</html>
