@@ -67,14 +67,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:64px;d
 @media(max-width:900px){.nav-links,.nav-pill{display:none}.nav-burger{display:flex}}
 
 /* === HERO === */
-#hero-canvas{position:absolute;inset:0;z-index:0;pointer-events:none}
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:120px;padding-bottom:40px;position:relative;overflow:hidden}
-.hero::after{content:'';position:absolute;top:10%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(200,240,0,.06) 0%,transparent 65%);border-radius:50%;pointer-events:none;animation:orbFloat 8s ease-in-out infinite}
-@keyframes orbFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-40px) scale(1.05)}}
-
-/* scanline flicker on hero */
-.hero::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);animation:scanMove 8s linear infinite}
+#hero-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;width:100vw;height:100vh}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:120px;padding-bottom:40px;position:relative;overflow:visible}
+.hero::after{content:'';position:fixed;top:10%;right:0;width:50vw;height:50vw;background:radial-gradient(circle,rgba(200,240,0,.06) 0%,transparent 65%);border-radius:50%;pointer-events:none;animation:orbFloat 8s ease-in-out infinite;z-index:0}
+.hero::before{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);animation:scanMove 8s linear infinite}
 @keyframes scanMove{from{background-position:0 0}to{background-position:0 100vh}}
+@keyframes orbFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-40px) scale(1.05)}}
 
 .hero-label{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:var(--lime-dim);border:1px solid rgba(200,240,0,.25);border-radius:40px;font-family:'Space Mono',monospace;font-size:10px;color:var(--lime);letter-spacing:2px;text-transform:uppercase;margin-bottom:32px;animation:fadeUp .8s .2s cubic-bezier(.16,1,.3,1) both}
 .hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,12vw,180px);line-height:.88;letter-spacing:-1px;margin-bottom:40px;animation:fadeUp .8s .35s cubic-bezier(.16,1,.3,1) both}
@@ -120,9 +118,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:64px;d
 .btn-contact{text-transform:lowercase!important}.btn-contact .btn-text-wrap{position:relative;display:inline-block}.btn-contact .btn-default{transition:opacity .25s}.btn-contact .btn-hover{position:absolute;left:0;top:0;width:max-content;opacity:0;transition:opacity .25s}.btn-contact:hover .btn-default{opacity:0}.btn-contact:hover .btn-hover{opacity:1}
 
 /* === GLITCH IMG === */
-.glitch-img-wrap{position:relative;display:inline-block;transform:rotate(-8deg);flex-shrink:0}
-.glitch-img-wrap img{display:block;height:clamp(50px,5vw,80px);width:auto;position:relative;z-index:1}
-.glitch-img-wrap::before,.glitch-img-wrap::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:url('https://i.imgur.com/GLk9IMF.png') left center/contain no-repeat;z-index:0}
+.glitch-img-wrap{position:absolute;bottom:45%;left:calc(100% + 20px);transform:rotate(-8deg);flex-shrink:0;pointer-events:none;z-index:10}
+.glitch-img-wrap img{display:block;height:clamp(70px,7vw,110px);width:auto;position:relative;z-index:1;-webkit-user-drag:none;user-select:none;pointer-events:none}
+.glitch-img-wrap::before,.glitch-img-wrap::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:url('https://i.imgur.com/GLk9IMF.png') left center/contain no-repeat;z-index:2}
 .glitch-img-wrap::before{filter:hue-rotate(180deg) saturate(3) brightness(1.5);mix-blend-mode:screen;animation:imgGlA 2.5s infinite .3s;clip-path:inset(0 0 100% 0)}
 .glitch-img-wrap::after{filter:hue-rotate(270deg) saturate(3) brightness(1.2);mix-blend-mode:screen;animation:imgGlB 2.5s infinite .6s;clip-path:inset(0 0 100% 0)}
 @keyframes imgGlA{0%,78%,100%{clip-path:inset(0 0 100% 0);transform:translateX(0)}79%{clip-path:inset(15% 0 55% 0);transform:translateX(-6px)}81%{clip-path:inset(0 0 100% 0)}83%{clip-path:inset(60% 0 10% 0);transform:translateX(4px)}85%{clip-path:inset(0 0 100% 0);transform:translateX(0)}}
@@ -204,9 +202,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:64px;d
 .reel-progress{position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(255,255,255,.08);z-index:3}
 .reel-progress-fill{height:100%;background:var(--lime);width:0;transition:width .1s linear}
 @media(max-width:600px){.reel-section{height:70vh}.reel-title{font-size:clamp(36px,9vw,60px)}.reel-counter{font-size:56px;top:24px;right:20px}.reel-timeline{left:20px;top:24px}.reel-content{padding:0 0 40px}}
-/* === X ANIMADA === */
-.reel-x{display:inline-block;color:var(--lime);animation:xFlip 2.8s ease-in-out infinite;transform-style:preserve-3d;perspective:400px}
-@keyframes xFlip{0%,100%{transform:rotateY(0deg) scale(1);text-shadow:0 0 30px rgba(200,240,0,.5),0 0 60px rgba(200,240,0,.2);color:var(--lime)}40%{transform:rotateY(90deg) scale(.85);text-shadow:none;color:rgba(200,240,0,.1)}50%{transform:rotateY(180deg) scale(1);text-shadow:0 0 30px rgba(74,108,247,.6),0 0 60px rgba(74,108,247,.2);color:#4a6cf7}90%{transform:rotateY(270deg) scale(.85);text-shadow:none;color:rgba(200,240,0,.1)}}
+/* === X GLITCH === */
+.reel-x{display:inline-block;color:var(--lime);position:relative;animation:xPulse 3s ease-in-out infinite}
+.reel-x::before{content:'';position:absolute;inset:-60px;background:radial-gradient(circle,rgba(200,240,0,.35) 0%,transparent 65%);pointer-events:none;z-index:-1;animation:xGlowPulse 3s ease-in-out infinite;border-radius:50%}
+@keyframes xGlowPulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.2)}}
+@keyframes xPulse{0%,100%{color:var(--lime)}50%{color:#e0ff4f}}
+.reel-x .reel-x-ghost{content:'X';position:absolute;left:0;top:0;pointer-events:none}
+.reel-x-ghost.c1{color:#4a6cf7;animation:xGlitchA 2.2s infinite .5s;clip-path:inset(0 0 100% 0);mix-blend-mode:screen}
+.reel-x-ghost.c2{color:#ff3366;animation:xGlitchB 2.2s infinite .8s;clip-path:inset(0 0 100% 0);mix-blend-mode:screen}
+@keyframes xGlitchA{0%,75%,100%{clip-path:inset(0 0 100% 0);transform:translateX(0)}76%{clip-path:inset(10% 0 60% 0);transform:translateX(-5px)}78%{clip-path:inset(0 0 100% 0)}80%{clip-path:inset(55% 0 15% 0);transform:translateX(4px)}82%{clip-path:inset(0 0 100% 0);transform:translateX(0)}}
+@keyframes xGlitchB{0%,75%,100%{clip-path:inset(0 0 100% 0);transform:translateX(0)}77%{clip-path:inset(35% 0 40% 0);transform:translateX(6px)}79%{clip-path:inset(0 0 100% 0)}81%{clip-path:inset(70% 0 5% 0);transform:translateX(-3px)}83%{clip-path:inset(0 0 100% 0);transform:translateX(0)}}
 
 /* === VIDEO SECTION === */
 .vid-section{position:relative;z-index:2;padding:80px 0 60px}
@@ -244,15 +249,29 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:64px;d
 .vb-poster-cat{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:1px;text-transform:uppercase;color:var(--ch-color);opacity:.85}
 .vb-poster-title{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1px;color:#fff;line-height:1}
 .vb-poster.active::before{content:'';position:absolute;top:0;left:0;width:24px;height:2px;background:var(--ch-color);z-index:5}
-.phone-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;padding:20px 0}
+.phone-wrap{display:flex;flex-direction:column;align-items:center;gap:20px;padding:20px 0}
 .phone{position:relative;width:280px;height:500px;background:#000;border-radius:40px;border:3px solid rgba(255,255,255,.12);box-shadow:0 40px 80px -20px rgba(0,0,0,.8),inset 0 0 0 1px rgba(255,255,255,.05);overflow:hidden}
 .phone::before{content:'';position:absolute;top:10px;left:50%;transform:translateX(-50%);width:60px;height:5px;border-radius:3px;background:rgba(255,255,255,.12);z-index:10}
 .phone video{width:100%;height:100%;object-fit:cover;display:block;border-radius:37px}
-.phone-dots{display:flex;gap:6px;justify-content:center}
-.phone-dot{width:8px;height:8px;border-radius:50%;border:1.5px solid var(--border);background:transparent;cursor:none;transition:all .25s}.phone-dot.active{background:var(--ch-color);border-color:var(--ch-color);box-shadow:0 0 8px var(--ch-color);width:24px;border-radius:4px}
-.phone-nav{display:flex;align-items:center;gap:18px}
-.phone-arrow{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:none;transition:all .3s;background:transparent;color:var(--muted)}.phone-arrow:hover{background:color-mix(in srgb,var(--ch-color) 15%,transparent);color:var(--ch-color);border-color:var(--ch-color)}.phone-arrow svg{width:16px;height:16px}
-.phone-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ch-color);min-width:90px;text-align:center}
+/* stories progress bars inside phone */
+.phone-stories-bar{position:absolute;top:22px;left:12px;right:12px;display:flex;gap:4px;z-index:20}
+.phone-story-seg{flex:1;height:2.5px;border-radius:2px;background:rgba(255,255,255,.25);overflow:hidden;cursor:none}
+.phone-story-seg-fill{height:100%;background:#fff;width:0%;transition:none}
+.phone-story-seg.done .phone-story-seg-fill{width:100%}
+.phone-story-seg.active .phone-story-seg-fill{animation:storyFill 6s linear forwards}
+@keyframes storyFill{from{width:0%}to{width:100%}}
+/* tap zones inside phone */
+.phone-tap-prev,.phone-tap-next{position:absolute;top:0;bottom:0;width:40%;z-index:15;cursor:none}
+.phone-tap-prev{left:0}.phone-tap-next{right:0}
+/* external arrows beside phone */
+.phone-outer{position:relative;display:flex;align-items:center;gap:0}
+.phone-side-arrow{width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(59,130,246,.3);display:flex;align-items:center;justify-content:center;cursor:none;transition:all .3s;background:rgba(59,130,246,.08);color:rgba(59,130,246,.7);flex-shrink:0}.phone-side-arrow:hover{background:rgba(59,130,246,.2);color:#3b82f6;border-color:rgba(59,130,246,.6);transform:scale(1.1)}.phone-side-arrow svg{width:18px;height:18px}
+.phone-dots{display:flex;gap:8px;justify-content:center}
+.phone-dot{width:32px;height:3px;border-radius:2px;background:rgba(255,255,255,.15);cursor:none;transition:all .3s cubic-bezier(.16,1,.3,1)}.phone-dot.active{background:var(--ch-color);width:48px;box-shadow:0 0 8px var(--ch-color)}
+.phone-dot:not(.active):hover{background:rgba(255,255,255,.3)}
+.phone-nav{display:flex;align-items:center;gap:16px}
+.phone-arrow{display:none}
+.phone-label{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;text-transform:uppercase;color:var(--ch-color);min-width:90px;text-align:center}
 .mud-frame{position:relative;background:#000;border-radius:var(--radius);overflow:hidden;border:1px solid rgba(168,85,247,.15);box-shadow:0 0 60px -20px rgba(168,85,247,.15)}
 .mud-frame video,.mud-frame iframe{display:block;max-width:100%;max-height:60vh;margin:0 auto;cursor:default;border:none;width:100%}
 .mud-frame iframe{aspect-ratio:16/9}
@@ -291,9 +310,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:64px;d
 .ig-follow-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:12px;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:all .35s;cursor:none;border:none}.ig-follow-btn:hover{transform:translateY(-2px) scale(1.03)}.ig-follow-btn svg{width:16px;height:16px}
 .ig-widget-wrapper{width:100%;position:relative;z-index:1}.ig-widget-wrapper,.ig-widget-wrapper *{cursor:none!important}
 .ig-widget-wrapper [class*="Header__Container-sc"],.ig-widget-wrapper .eapps-instagram-feed-header,.ig-widget-wrapper [class*="Button__Container"],.ig-widget-wrapper [class*="Actions__Container"],.ig-widget-wrapper .eapps-instagram-feed-posts-view-more{display:none!important}
-body a[href*="elfsight"],body a[href*="elf.site"],body [class*="eapps-widget-toolbar"],body [class*="ea-app-badge"],body [class*="Badge__Container"],body [class*="Watermark__Container"],body .eapps-link,body .ea-editor-badge,body .eapps-instagram-feed-badge,body>div[style*="z-index: 999999"]{background:var(--bg)!important;color:var(--bg)!important;box-shadow:none!important;border:none!important;pointer-events:none!important;position:relative!important}
+body a[href*="elfsight"],body a[href*="elf.site"],body [class*="eapps-widget-toolbar"],body [class*="ea-app-badge"],body [class*="Badge__Container"],body [class*="Watermark__Container"],body .eapps-link,body .ea-editor-badge,body .eapps-instagram-feed-badge,body>div[style*="z-index: 999999"]{opacity:0!important;pointer-events:none!important;position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important}
 body a[href*="elfsight"] *,body a[href*="elf.site"] *,body [class*="eapps-widget-toolbar"] *,body [class*="ea-app-badge"] *,body [class*="Badge__Container"] *,body [class*="Watermark__Container"] *,body .eapps-link *,body .ea-editor-badge *,body .eapps-instagram-feed-badge *,body>div[style*="z-index: 999999"] *{opacity:0!important;visibility:hidden!important}
-body a[href*="elfsight"]::after,body a[href*="elf.site"]::after,body [class*="eapps-widget-toolbar"]::after,body [class*="ea-app-badge"]::after,body [class*="Badge__Container"]::after,body [class*="Watermark__Container"]::after,body .eapps-link::after,body .ea-editor-badge::after,body .eapps-instagram-feed-badge::after{content:''!important;position:absolute!important;inset:-10px!important;background-color:var(--bg)!important;z-index:9999999!important;pointer-events:auto!important;cursor:default!important}
+body a[href*="elfsight"]::after,body a[href*="elf.site"]::after,body [class*="eapps-widget-toolbar"]::after,body [class*="ea-app-badge"]::after,body [class*="Badge__Container"]::after,body [class*="Watermark__Container"]::after,body .eapps-link::after,body .ea-editor-badge::after,body .eapps-instagram-feed-badge::after{display:none!important}
 
 /* === LINKEDIN BTN === */
 .ig-linkedin-btn{display:inline-flex;align-items:center;gap:12px;padding:14px 28px;background:var(--lime);border-radius:40px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#000;text-decoration:none;cursor:none;transition:all .35s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden;border:none;margin:16px auto 0;display:flex;width:fit-content}
@@ -431,19 +450,8 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border);padding:32
         <span class="line-1">Jhordan</span>
         <span class="line-2">
           <span class="glitch" data-text="ROMERO.">ROMERO<span class="accent">.</span></span>
-          <span class="graffiti-scroll">
-            <span class="tag-text">desliza
-              <span class="splatter" style="top:-8px;left:-10px;width:5px;height:5px;"></span>
-              <span class="splatter" style="bottom:10px;right:-15px;width:7px;height:7px;"></span>
-              <span class="splatter" style="top:15px;right:15px;width:3px;height:3px;"></span>
-            </span>
-            <svg class="tag-graphic" viewBox="0 0 60 60">
-              <path class="ink-stroke" d="M10,20 Q30,10 40,45"/>
-              <path class="ink-stroke" d="M25,35 L40,45 L45,25"/>
-              <circle cx="15" cy="45" r="3" class="ink-fill"/>
-              <circle cx="45" cy="15" r="2" class="ink-fill"/>
-              <circle cx="55" cy="35" r="3" class="ink-fill"/>
-            </svg>
+          <span class="glitch-img-wrap">
+            <img src="https://i.imgur.com/GLk9IMF.png" alt="desliza">
           </span>
         </span>
       </h1>
@@ -453,7 +461,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border);padding:32
           <div class="cta-group">
             <div class="cta-label sub">Conecta</div>
             <div class="hero-cta-row">
-              <a href="/cdn-cgi/l/email-protection#59333b2b36343c2b3668192c3a773a35" class="btn btn-lime btn-contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><span class="btn-text-wrap"><span class="btn-default"><span class="__cf_email__" data-cfemail="761c1404191b1304194736031558151a">[email&#160;protected]</span></span><span class="btn-hover">enviar correo</span></span></a>
+              <a href="/cdn-cgi/l/email-protection#056f67776a6860776a344570662b6669" class="btn btn-lime btn-contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><span class="btn-text-wrap"><span class="btn-default"><span class="__cf_email__" data-cfemail="9df7ffeff2f0f8eff2acdde8feb3fef1">[email&#160;protected]</span></span><span class="btn-hover">enviar correo</span></span></a>
               <a href="https://wa.me/56985889548" target="_blank" class="btn btn-wa btn-contact"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479c0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.843L.057 23.667a.749.749 0 0 0 .919.919l5.824-1.471A11.952 11.952 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.803 9.803 0 0 1-5.022-1.379l-.36-.213-3.455.873.873-3.455-.213-.36A9.803 9.803 0 0 1 2.182 12C2.182 6.569 6.569 2.182 12 2.182c5.431 0 9.818 4.387 9.818 9.818 0 5.431-4.387 9.818-9.818 9.818z"/></svg><span class="btn-text-wrap"><span class="btn-default">+56 9 8588 9548</span><span class="btn-hover">abrir chat</span></span></a>
               <a href="https://instagram.com/jotar.r" target="_blank" class="btn btn-ig btn-contact"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0c-3.259 0-3.667.014-4.947.072C2.695.272.273 2.69.073 7.048.014 8.329 0 8.737 0 11.996s.014 3.668.072 4.948c.2 4.358 2.618 6.78 6.98 6.98 1.28.058 1.688.072 4.948.072s3.668-.014 4.948-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg><span>@jotar.r</span></a>
             </div>
@@ -486,22 +494,6 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border);padding:32
   <div class="ticker-row ticker-lime"><div class="ticker-label">Dominio</div><div class="ticker-track"><div class="ticker-inner" data-direction="right" data-speed="1.2"><span class="ticker-item ghost">B2B Strategy</span><span class="ticker-sep"></span><span class="ticker-item">Motion Graphics</span><span class="ticker-sep"></span><span class="ticker-item ghost">Ecosistema Digital</span><span class="ticker-sep"></span><span class="ticker-item lime">Dirección Creativa</span><span class="ticker-sep"></span><span class="ticker-item ghost">Producción Audiovisual</span><span class="ticker-sep"></span><span class="ticker-item">Retail & Corp</span><span class="ticker-sep"></span><span class="ticker-item ghost">Comunicación Visual</span><span class="ticker-sep"></span><span class="ticker-item lime">Gestión de Proyectos</span><span class="ticker-sep"></span></div></div></div>
 </div>
 
-<!-- EXPERTISE -->
-<div class="wrap" id="expertise">
-  <section class="section">
-    <div class="section-tag reveal">Expertise</div>
-    <h2 class="section-title reveal reveal-delay-1">Lo que<br>hago mejor.</h2>
-    <div class="bento">
-      <div class="card card-span-8 reveal reveal-delay-1"><div class="card-glow glow-blue"></div><div class="icon-circle" style="color:var(--blue);border-color:rgba(74,108,247,.2);background:rgba(74,108,247,.08)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="card-label">01 — Liderazgo & Gestión</div><div class="card-title">Gestión de Equipos<br>&amp; Stakeholders.</div><div class="card-body">Liderazgo de equipos creativos y multidisciplinarios, relación directa con stakeholders y gestión de proyectos alineados a objetivos de negocio.</div><div class="tag-row"><span class="tag">Gestión de equipos</span><span class="tag">Stakeholders</span><span class="tag">Agile</span><span class="tag">Roadmap</span></div></div>
-      <div class="card card-span-4 card-lime reveal reveal-delay-2" style="display:flex;flex-direction:column;justify-content:space-between"><div class="card-label">Experiencia</div><div><div class="card-number" style="font-size:clamp(64px,5vw,86px)">+6 años</div><div class="card-body" style="color:#000;font-size:15px;font-weight:300">Liderando creatividad y estrategia en entornos de alta demanda.</div></div></div>
-      <div class="card card-span-4 reveal reveal-delay-2"><div class="card-glow glow-lime"></div><div class="icon-circle" style="color:var(--lime);border-color:rgba(200,240,0,.2);background:var(--lime-dim)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="card-label">02 — CX & UX</div><div class="card-title">Diseño &amp;<br>Ecosistemas.</div><div class="card-body">Integración de diseño, experiencia de cliente y estrategia de marca para impacto real.</div></div>
-      <div class="card card-span-4 reveal reveal-delay-3"><div class="card-glow glow-purple"></div><div class="icon-circle" style="color:#a855f7;border-color:rgba(168,85,247,.2);background:rgba(168,85,247,.08)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg></div><div class="card-label">03 — IA & Tech</div><div class="card-title">IA Aplicada<br>al Proceso.</div><div class="card-body">Implementación estratégica de inteligencia artificial en procesos creativos.</div></div>
-      <div class="card card-span-4 reveal reveal-delay-4"><div class="icon-circle" style="color:#f59e0b;border-color:rgba(245,158,11,.2);background:rgba(245,158,11,.08)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><div class="card-label">04 — Audiovisual</div><div class="card-title">Producción<br>Audiovisual.</div><div class="card-body">Desarrollo audiovisual integral, motion graphics y contenido visual de alto impacto.</div></div>
-    </div>
-  </section>
-</div>
-<div class="divider"></div>
-
 <!-- SHOWREEL -->
 <section class="reel-section" id="reel">
   <div class="reel-video-bg">
@@ -528,7 +520,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border);padding:32
   </div>
   <div class="wrap reel-content">
     <div class="reel-tag">Showreel</div>
-    <h2 class="reel-title">El trabajo habla<br><span class="reel-x">X</span> si solo.</h2>
+    <h2 class="reel-title">El trabajo habla<br><span class="reel-x"><span class="reel-x-ghost c1">X</span><span class="reel-x-ghost c2">X</span>X</span> si solo.</h2>
     <div class="reel-actions">
       <a href="#videos" class="reel-btn reel-btn-primary" data-hoverable>
         <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -542,6 +534,22 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border);padding:32
   </div>
   <div class="reel-progress"><div class="reel-progress-fill" id="reelFill"></div></div>
 </section>
+
+<!-- EXPERTISE -->
+<div class="wrap" id="expertise">
+  <section class="section">
+    <div class="section-tag reveal">Expertise</div>
+    <h2 class="section-title reveal reveal-delay-1">Lo que<br>hago mejor.</h2>
+    <div class="bento">
+      <div class="card card-span-8 reveal reveal-delay-1"><div class="card-glow glow-blue"></div><div class="icon-circle" style="color:var(--blue);border-color:rgba(74,108,247,.2);background:rgba(74,108,247,.08)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="card-label">01 — Liderazgo & Gestión</div><div class="card-title">Gestión de Equipos<br>&amp; Stakeholders.</div><div class="card-body">Liderazgo de equipos creativos y multidisciplinarios, relación directa con stakeholders y gestión de proyectos alineados a objetivos de negocio.</div><div class="tag-row"><span class="tag">Gestión de equipos</span><span class="tag">Stakeholders</span><span class="tag">Agile</span><span class="tag">Roadmap</span></div></div>
+      <div class="card card-span-4 card-lime reveal reveal-delay-2" style="display:flex;flex-direction:column;justify-content:space-between"><div class="card-label">Experiencia</div><div><div class="card-number" style="font-size:clamp(64px,5vw,86px)">+6 años</div><div class="card-body" style="color:#000;font-size:15px;font-weight:300">Liderando creatividad y estrategia en entornos de alta demanda.</div></div></div>
+      <div class="card card-span-4 reveal reveal-delay-2"><div class="card-glow glow-lime"></div><div class="icon-circle" style="color:var(--lime);border-color:rgba(200,240,0,.2);background:var(--lime-dim)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="card-label">02 — CX & UX</div><div class="card-title">Diseño &amp;<br>Ecosistemas.</div><div class="card-body">Integración de diseño, experiencia de cliente y estrategia de marca para impacto real.</div></div>
+      <div class="card card-span-4 reveal reveal-delay-3"><div class="card-glow glow-purple"></div><div class="icon-circle" style="color:#a855f7;border-color:rgba(168,85,247,.2);background:rgba(168,85,247,.08)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg></div><div class="card-label">03 — IA & Tech</div><div class="card-title">IA Aplicada<br>al Proceso.</div><div class="card-body">Implementación estratégica de inteligencia artificial en procesos creativos.</div></div>
+      <div class="card card-span-4 reveal reveal-delay-4"><div class="icon-circle" style="color:#f59e0b;border-color:rgba(245,158,11,.2);background:rgba(245,158,11,.08)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><div class="card-label">04 — Audiovisual</div><div class="card-title">Producción<br>Audiovisual.</div><div class="card-body">Desarrollo audiovisual integral, motion graphics y contenido visual de alto impacto.</div></div>
+    </div>
+  </section>
+</div>
+<div class="divider"></div>
 
 <!-- VIDEOS -->
 <div class="wrap" id="videos">
@@ -585,12 +593,24 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border);padding:32
       <div class="vb-header" onclick="toggleVB(this,2)"><div class="vb-num">03</div><div class="vb-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="vb-meta"><div class="vb-name">Jean Paul <span class="accent">Olhaberry</span></div><div class="vb-cat">Reels Redes Sociales · Marca personal</div></div><div class="vb-count">4 reels</div><div class="vb-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div></div>
       <div class="vb-body"><div class="vb-inner">
         <div class="phone-wrap" data-phone>
-          <div class="phone"><video src="https://i.imgur.com/EKv8174.mp4" controls preload="metadata" loop playsinline></video></div>
+          <div class="phone-outer">
+            <button class="phone-side-arrow" onclick="phoneNav(this,-1)" data-hoverable><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
+            <div class="phone">
+              <div class="phone-stories-bar">
+                <div class="phone-story-seg active" data-seg="0"><div class="phone-story-seg-fill"></div></div>
+                <div class="phone-story-seg" data-seg="1"><div class="phone-story-seg-fill"></div></div>
+                <div class="phone-story-seg" data-seg="2"><div class="phone-story-seg-fill"></div></div>
+                <div class="phone-story-seg" data-seg="3"><div class="phone-story-seg-fill"></div></div>
+              </div>
+              <div class="phone-tap-prev" onclick="phoneNav(this,-1)" data-hoverable></div>
+              <div class="phone-tap-next" onclick="phoneNav(this,1)" data-hoverable></div>
+              <video src="https://i.imgur.com/EKv8174.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <button class="phone-side-arrow" onclick="phoneNav(this,1)" data-hoverable><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+          </div>
           <div class="phone-nav">
-            <button class="phone-arrow" onclick="phoneNav(this,-1)" data-hoverable><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
             <div class="phone-dots"><div class="phone-dot active" data-i="0"></div><div class="phone-dot" data-i="1"></div><div class="phone-dot" data-i="2"></div><div class="phone-dot" data-i="3"></div></div>
             <div class="phone-label">Infinito</div>
-            <button class="phone-arrow" onclick="phoneNav(this,1)" data-hoverable><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
           </div>
         </div>
       </div></div>
@@ -624,9 +644,8 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border);padding:32
 <!-- IG -->
 <div class="wrap" id="social">
   <section class="ig-section section"><div class="section-tag reveal">Social</div><h2 class="section-title reveal reveal-delay-1" style="margin-bottom:16px">El feed.</h2><div class="ig-header reveal reveal-delay-2"><div class="ig-profile"><div class="ig-avatar"><img src="https://i.imgur.com/0Wga0fs.jpeg" alt="Jhordan Romero" class="ig-avatar-inner"></div><div class="ig-info"><div class="ig-name">Jhordan Romero <svg class="ig-verified" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1.9 14.7L6 12.6l1.5-1.5 2.6 2.6 6.4-6.4 1.5 1.5-7.9 7.9z"/></svg></div><div class="ig-handle">@jotar.r</div><div class="ig-bio-text">Dirección Creativa · Diseño · IA · Santiago, CL</div></div></div><a href="https://instagram.com/jotar.r" target="_blank" class="ig-follow-btn" data-hoverable><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0c-3.259 0-3.667.014-4.947.072C2.695.272.273 2.69.073 7.048.014 8.329 0 8.737 0 11.996s.014 3.668.072 4.948c.2 4.358 2.618 6.78 6.98 6.98 1.28.058 1.688.072 4.948.072s3.668-.014 4.948-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg><span>Seguir</span></a></div><div style="position:relative">
-  <div class="ig-widget-wrapper reveal reveal-delay-3"><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://elfsightcdn.com/platform.js" async></script><div class="elfsight-app-da5b8e38-3dce-46d3-a97b-3e89136f9f59" data-elfsight-app-lazy></div></div>
-</div>
-<div style="display:flex;justify-content:center;padding:16px 0 4px;position:relative;z-index:20">
+<div class="ig-widget-wrapper reveal reveal-delay-3"><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://elfsightcdn.com/platform.js" async></script><div class="elfsight-app-da5b8e38-3dce-46d3-a97b-3e89136f9f59" data-elfsight-app-lazy></div></div>
+<div style="display:flex;justify-content:center;padding:20px 0">
   <a href="https://www.linkedin.com/in/jhordanromeror/" target="_blank" class="ig-linkedin-btn reveal reveal-delay-4" data-hoverable>
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
     Conectemos en LinkedIn
@@ -638,7 +657,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border);padding:32
 
 <!-- CONTACT -->
 <div class="wrap" id="contacto">
-  <section class="section" style="padding-bottom:60px"><div class="section-tag reveal">Contacto</div><h2 class="section-title reveal reveal-delay-1">Hablemos.</h2><div class="contact-grid"><a href="/cdn-cgi/l/email-protection#b6dcd4c4d9dbd3c4d987f6c3d598d5da" class="contact-card email reveal reveal-delay-1" data-hoverable><div class="contact-icon email-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg></div><div class="contact-label">Email directo</div><div class="contact-value"><span class="__cf_email__" data-cfemail="543e36263b3931263b651421377a3738">[email&#160;protected]</span></div><div class="contact-arrow"><span>Escribir ahora</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div></a><a href="https://wa.me/56985889548" target="_blank" class="contact-card wa reveal reveal-delay-2" data-hoverable><div class="contact-icon wa-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479c0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.843L.057 23.667a.749.749 0 00.919.919l5.824-1.471A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.803 9.803 0 01-5.022-1.379l-.36-.213-3.455.873.873-3.455-.213-.36A9.803 9.803 0 012.182 12C2.182 6.569 6.569 2.182 12 2.182c5.431 0 9.818 4.387 9.818 9.818 0 5.431-4.387 9.818-9.818 9.818z"/></svg></div><div class="contact-label">WhatsApp</div><div class="contact-value">+56 9 8588 9548</div><div class="contact-arrow"><span>Abrir chat</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div></a><a href="https://instagram.com/jotar.r" target="_blank" class="contact-card ig reveal reveal-delay-3" data-hoverable><div class="contact-icon ig-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0c-3.259 0-3.667.014-4.947.072C2.695.272.273 2.69.073 7.048.014 8.329 0 8.737 0 11.996s.014 3.668.072 4.948c.2 4.358 2.618 6.78 6.98 6.98 1.28.058 1.688.072 4.948.072s3.668-.014 4.948-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div><div class="contact-label">Instagram</div><div class="contact-value">@jotar.r</div><div class="contact-arrow"><span>Ver perfil</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div></a></div></section>
+  <section class="section" style="padding-bottom:60px"><div class="section-tag reveal">Contacto</div><h2 class="section-title reveal reveal-delay-1">Hablemos.</h2><div class="contact-grid"><a href="/cdn-cgi/l/email-protection#84eee6f6ebe9e1f6ebb5c4f1e7aae7e8" class="contact-card email reveal reveal-delay-1" data-hoverable><div class="contact-icon email-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg></div><div class="contact-label">Email directo</div><div class="contact-value"><span class="__cf_email__" data-cfemail="1f757d6d70727a6d702e5f6a7c317c73">[email&#160;protected]</span></div><div class="contact-arrow"><span>Escribir ahora</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div></a><a href="https://wa.me/56985889548" target="_blank" class="contact-card wa reveal reveal-delay-2" data-hoverable><div class="contact-icon wa-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479c0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.843L.057 23.667a.749.749 0 00.919.919l5.824-1.471A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.803 9.803 0 01-5.022-1.379l-.36-.213-3.455.873.873-3.455-.213-.36A9.803 9.803 0 012.182 12C2.182 6.569 6.569 2.182 12 2.182c5.431 0 9.818 4.387 9.818 9.818 0 5.431-4.387 9.818-9.818 9.818z"/></svg></div><div class="contact-label">WhatsApp</div><div class="contact-value">+56 9 8588 9548</div><div class="contact-arrow"><span>Abrir chat</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div></a><a href="https://instagram.com/jotar.r" target="_blank" class="contact-card ig reveal reveal-delay-3" data-hoverable><div class="contact-icon ig-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0c-3.259 0-3.667.014-4.947.072C2.695.272.273 2.69.073 7.048.014 8.329 0 8.737 0 11.996s.014 3.668.072 4.948c.2 4.358 2.618 6.78 6.98 6.98 1.28.058 1.688.072 4.948.072s3.668-.014 4.948-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div><div class="contact-label">Instagram</div><div class="contact-value">@jotar.r</div><div class="contact-arrow"><span>Ver perfil</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div></a></div></section>
 </div>
 
 <footer><div class="footer-logo">JRR<span style="color:var(--lime)">.</span></div><div class="footer-copy">&copy; <span id="year"></span> Jhordan Romero Rebolledo<br>Dirección Creativa &amp; Estrategia Digital</div></footer>
@@ -662,6 +681,12 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border);padding:32
 </a>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ---- KILL ELFSIGHT BADGE ---- */
+const killBadge=()=>{document.querySelectorAll('a[href*="elfsight"],a[href*="elf.site"],[class*="Badge__Container"],[class*="Watermark"],[class*="eapps-link"],[class*="ea-app-badge"],.eapps-instagram-feed-badge').forEach(el=>{if(el&&el.parentNode)el.parentNode.removeChild(el)});};
+killBadge();
+const badgeObs=new MutationObserver(killBadge);
+badgeObs.observe(document.body,{childList:true,subtree:true});
+
 /* ---- CURSOR ---- */
 if(window.matchMedia("(pointer:fine)").matches){
   const cursor=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');let mx=0,my=0,rx=0,ry=0;
@@ -795,7 +820,24 @@ function navTheater(btn,dir){const block=btn.closest('.vb-inner');const posters=
 function switchP(poster){if(poster.dataset.yt)return;const block=poster.closest('[data-vb]');const theater=block.querySelector('.vb-theater');const video=theater.querySelector('video');const oldIframe=theater.querySelector('iframe');if(oldIframe)oldIframe.remove();if(!video){const v=document.createElement('video');v.controls=true;v.preload='metadata';v.loop=true;v.playsInline=true;v.style.cssText='display:block;max-width:100%;max-height:65vh;cursor:default';v.src=poster.dataset.src;theater.insertBefore(v,theater.querySelector('.next'))}else{video.style.display='block';video.removeAttribute('poster');video.pause();video.src=poster.dataset.src;video.load()}block.querySelectorAll('.vb-poster').forEach(p=>p.classList.remove('active'));poster.classList.add('active')}
 const jpVideos=['https://i.imgur.com/EKv8174.mp4','https://i.imgur.com/7wYDHvq.mp4','https://i.imgur.com/5kah94a.mp4','https://i.imgur.com/fGjooxD.mp4'];
 const jpLabels=['Infinito','Viña','Cierre','ATP x BCI'];let jpIdx=0;
-function phoneNav(btn,dir){const wrap=btn.closest('[data-phone]');const video=wrap.querySelector('video');jpIdx=(jpIdx+dir+jpVideos.length)%jpVideos.length;video.pause();video.src=jpVideos[jpIdx];video.load();wrap.querySelectorAll('.phone-dot').forEach((d,i)=>d.classList.toggle('active',i===jpIdx));wrap.querySelector('.phone-label').textContent=jpLabels[jpIdx]}
+function phoneNav(btn,dir){
+  const wrap=btn.closest('[data-phone]');
+  const video=wrap.querySelector('video');
+  jpIdx=(jpIdx+dir+jpVideos.length)%jpVideos.length;
+  video.pause();video.src=jpVideos[jpIdx];video.load();
+  video.addEventListener('canplay',()=>video.play(),{once:true});
+  wrap.querySelectorAll('.phone-dot').forEach((d,i)=>d.classList.toggle('active',i===jpIdx));
+  wrap.querySelector('.phone-label').textContent=jpLabels[jpIdx];
+  // update story segments
+  wrap.querySelectorAll('.phone-story-seg').forEach((seg,i)=>{
+    seg.classList.remove('active','done');
+    const fill=seg.querySelector('.phone-story-seg-fill');
+    fill.style.animation='none';fill.offsetHeight;// reflow
+    fill.style.width=i<jpIdx?'100%':'0%';
+    if(i<jpIdx)seg.classList.add('done');
+    if(i===jpIdx){fill.style.animation='';seg.classList.add('active');}
+  });
+}
 function switchIlm(card){const block=card.closest('[data-vb]');const frame=block.querySelector('.mud-frame');const oldVideo=frame.querySelector('video');const oldIframe=frame.querySelector('iframe');if(card.dataset.type==='yt'){if(oldVideo)oldVideo.style.display='none';if(oldIframe)oldIframe.remove();const iframe=document.createElement('iframe');iframe.src='https://www.youtube-nocookie.com/embed/'+card.dataset.yt+'?autoplay=1&rel=0&modestbranding=1';iframe.style.cssText='width:100%;aspect-ratio:16/9;border:none;display:block;max-height:60vh';iframe.allow='autoplay;encrypted-media';iframe.allowFullscreen=true;frame.insertBefore(iframe,frame.querySelector('.next'))}else{if(oldIframe)oldIframe.remove();if(oldVideo){oldVideo.style.display='block';oldVideo.pause();oldVideo.src=card.dataset.src;oldVideo.load()}}block.querySelectorAll('.ilm-card').forEach(c=>c.classList.remove('active'));card.classList.add('active')}
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeMobileMenu()}});
