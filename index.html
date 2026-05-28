@@ -173,7 +173,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:64px;d
 .reel-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,10,.5) 0%,rgba(10,10,10,.1) 30%,rgba(10,10,10,.1) 55%,rgba(10,10,10,.92) 100%);z-index:1}
 .reel-overlay-left{position:absolute;inset:0;background:linear-gradient(to right,rgba(10,10,10,.6) 0%,transparent 60%);z-index:1}
 .reel-noise{position:absolute;inset:0;z-index:2;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none}
-.reel-content{position:relative;z-index:3;width:100%;padding-bottom:64px}
+.reel-content{position:relative;z-index:3;width:100%;padding-bottom:96px}
 .reel-tag{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--lime);margin-bottom:20px;display:flex;align-items:center;gap:10px}
 .reel-tag::before{content:'';width:32px;height:1px;background:var(--lime)}
 .reel-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,7.5vw,130px);line-height:.88;letter-spacing:-1px;color:#fff;margin-bottom:32px;text-wrap:balance;overflow:hidden}
@@ -199,7 +199,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:64px;d
 /* progress bar */
 .reel-progress{position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(255,255,255,.08);z-index:3}
 .reel-progress-fill{height:100%;background:var(--lime);width:0;transition:width .1s linear}
-@media(max-width:600px){.reel-section{height:70vh}.reel-title{font-size:clamp(36px,9vw,60px)}.reel-counter{font-size:56px;top:24px;right:20px}.reel-timeline{left:20px;top:24px}.reel-content{padding:0 0 40px}}
+@media(max-width:600px){.reel-section{height:70vh}.reel-title{font-size:clamp(36px,9vw,60px)}.reel-counter{font-size:56px;top:24px;right:20px}.reel-timeline{left:20px;top:24px}.reel-content{padding:0 0 72px}}
 
 /* === X GLITCH (sin glow) === */
 .reel-x{display:inline-block;color:var(--lime);position:relative}
@@ -232,8 +232,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:64px;d
 .vb-theater:hover .theater-btn,.mud-frame:hover .theater-btn{opacity:1}
 .theater-btn:hover{background:var(--ch-color);color:#000;transform:translateY(-50%) scale(1.1);border-color:transparent}
 .theater-btn.prev{left:16px}.theater-btn.next{right:16px}.theater-btn svg{width:20px;height:20px}
-.vb-posters{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-.vb-poster{position:relative;flex-shrink:0;width:140px;height:84px;border-radius:10px;overflow:hidden;border:2px solid transparent;transition:all .3s;opacity:.5;background:#0a0a0a}
+.vb-posters{display:flex;gap:10px;margin-top:12px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;scroll-snap-type:x mandatory}
+.vb-posters::-webkit-scrollbar{display:none}
+.vb-poster{position:relative;flex-shrink:0;width:140px;height:84px;scroll-snap-align:start;border-radius:10px;overflow:hidden;border:2px solid transparent;transition:all .3s;opacity:.5;background:#0a0a0a}
 .vb-poster.active{border-color:var(--ch-color);opacity:1;box-shadow:0 0 18px -4px color-mix(in srgb,var(--ch-color) 40%,transparent)}
 .vb-poster:not(.active):hover{opacity:.85;transform:translateY(-3px);border-color:color-mix(in srgb,var(--ch-color) 30%,transparent)}
 .vb-poster video,.vb-poster img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;filter:brightness(.55) saturate(1.1)}.vb-poster.active video,.vb-poster.active img{filter:brightness(.5) saturate(1.2)}
@@ -317,8 +318,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:64px;d
 .mud-frame>video,.mud-frame>iframe{display:block;max-width:100%;max-height:60vh;margin:0 auto;cursor:default;border:none;width:100%}
 .mud-frame>iframe{aspect-ratio:16/9}
 .mud-frame::after{content:'';position:absolute;inset:0;border:12px solid transparent;border-image:linear-gradient(135deg,rgba(168,85,247,.2),transparent 40%,transparent 60%,rgba(168,85,247,.1)) 1;pointer-events:none;z-index:2}
-.ilm-carousel{display:flex;gap:10px;margin-top:12px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}.ilm-carousel::-webkit-scrollbar{display:none}
-.ilm-card{position:relative;flex-shrink:0;width:220px;border-radius:12px;overflow:hidden;border:1px solid var(--border);transition:all .3s;aspect-ratio:16/9;background:#000}
+.ilm-carousel{display:flex;gap:10px;margin-top:12px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;scroll-snap-type:x mandatory}
+.ilm-carousel::-webkit-scrollbar{display:none}
+.ilm-card{position:relative;flex-shrink:0;width:220px;scroll-snap-align:start;border-radius:12px;overflow:hidden;border:1px solid var(--border);transition:all .3s;aspect-ratio:16/9;background:#000}
 .ilm-card:hover{border-color:rgba(168,85,247,.35);transform:translateY(-3px)}
 .ilm-card.active{border-color:#a855f7;box-shadow:0 0 22px -6px rgba(168,85,247,.4)}
 .ilm-card video,.ilm-card img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;filter:brightness(.55)}.ilm-card.active video,.ilm-card.active img{filter:brightness(.5)}
@@ -439,6 +441,8 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border);padding:32
 }
 @media(max-width:600px){
   .hero-name{font-size:clamp(60px,15vw,80px)}.card-number{font-size:72px}.card,.contact-card{padding:24px}.doc-card{padding:24px}.ig-header{padding:20px}.phone{width:210px;height:375px}.vb-header{padding:16px 18px;gap:10px}.vb-inner{padding:0 16px 16px}.modal-box{height:96vh}.modal-actions .modal-btn span{display:none}.modal-btn{padding:9px 12px}.planet-sticker{width:90px;height:90px;bottom:12px;right:12px}.planet-body svg{width:28px;height:28px}.planet-sticker::after{width:36px;height:36px;margin-top:-18px;margin-left:-18px}
+  .vb-poster{width:calc((100vw - 72px) * 0.42);height:auto;aspect-ratio:140/84}
+  .ilm-card{width:calc((100vw - 72px) * 0.85);height:auto}
 }
 </style>
 </head>
@@ -591,7 +595,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border);padding:32
     <h2 class="section-title reveal reveal-delay-1" style="margin-bottom:32px">Videos<span style="color:var(--lime)">.</span></h2>
 
     <div class="vb open reveal" id="cat-0" style="--ch-color:#c8f000" data-vb>
-      <div class="vb-header" onclick="toggleVB(this,0)"><div class="vb-num">01</div><div class="vb-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg></div><div class="vb-meta"><div class="vb-name">Inteligencia <span class="accent">Artificial</span></div><div class="vb-cat">Contenido generativo · IA</div></div><div class="vb-count">4 videos</div><div class="vb-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div></div>
+      <div class="vb-header" onclick="toggleVB(this,0)"><div class="vb-num">01</div><div class="vb-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg></div><div class="vb-meta"><div class="vb-name">Inteligencia <span class="accent">Artificial</span></div><div class="vb-cat">Contenido generativo · IA</div></div><div class="vb-count">5 videos</div><div class="vb-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div></div>
       <div class="vb-body"><div class="vb-inner">
         <div class="vb-theater">
           <button class="theater-btn prev" onclick="navTheater(this,-1)" data-hoverable><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
@@ -600,9 +604,10 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border);padding:32
         </div>
         <div class="vb-posters">
           <div class="vb-poster active" data-src="https://i.imgur.com/AOOvYew.mp4" onclick="switchP(this)" data-hoverable><video src="https://i.imgur.com/AOOvYew.mp4#t=0.5" preload="none" muted playsinline></video><div class="vb-poster-ov"><div class="vb-poster-top"><div class="vb-poster-play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div><div class="vb-poster-bot"><div class="vb-poster-cat">IA · Reel</div><div class="vb-poster-title">I.A 01</div></div></div></div>
-          <div class="vb-poster" data-src="https://i.imgur.com/4KDyYiv.mp4" data-poster="https://i.imgur.com/N6CxG42.jpeg" onclick="switchP(this)" data-hoverable><img src="https://i.imgur.com/N6CxG42.jpeg" alt="I.A 02" loading="lazy"><div class="vb-poster-ov"><div class="vb-poster-top"><div class="vb-poster-play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div><div class="vb-poster-bot"><div class="vb-poster-cat">IA · Reel</div><div class="vb-poster-title">I.A 02</div></div></div></div>
-          <div class="vb-poster" data-src="https://i.imgur.com/03P5jNR.mp4" onclick="switchP(this)" data-hoverable><video src="https://i.imgur.com/03P5jNR.mp4#t=0.5" preload="none" muted playsinline></video><div class="vb-poster-ov"><div class="vb-poster-top"><div class="vb-poster-play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div><div class="vb-poster-bot"><div class="vb-poster-cat">IA · Reel</div><div class="vb-poster-title">I.A 03</div></div></div></div>
-          <div class="vb-poster" data-src="https://i.imgur.com/fASfECd.mp4" onclick="switchP(this)" data-hoverable><video src="https://i.imgur.com/fASfECd.mp4#t=0.5" preload="none" muted playsinline></video><div class="vb-poster-ov"><div class="vb-poster-top"><div class="vb-poster-play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div><div class="vb-poster-bot"><div class="vb-poster-cat">IA · Reel</div><div class="vb-poster-title">I.A 04</div></div></div></div>
+          <div class="vb-poster" data-src="https://i.imgur.com/DlK7x3x.mp4" onclick="switchP(this)" data-hoverable><video src="https://i.imgur.com/DlK7x3x.mp4#t=0.5" preload="none" muted playsinline></video><div class="vb-poster-ov"><div class="vb-poster-top"><div class="vb-poster-play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div><div class="vb-poster-bot"><div class="vb-poster-cat">IA · Reel</div><div class="vb-poster-title">Pésimo Servicio</div></div></div></div>
+          <div class="vb-poster" data-src="https://i.imgur.com/4KDyYiv.mp4" data-poster="https://i.imgur.com/N6CxG42.jpeg" onclick="switchP(this)" data-hoverable><img src="https://i.imgur.com/N6CxG42.jpeg" alt="I.A 03" loading="lazy"><div class="vb-poster-ov"><div class="vb-poster-top"><div class="vb-poster-play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div><div class="vb-poster-bot"><div class="vb-poster-cat">IA · Reel</div><div class="vb-poster-title">I.A 03</div></div></div></div>
+          <div class="vb-poster" data-src="https://i.imgur.com/03P5jNR.mp4" onclick="switchP(this)" data-hoverable><video src="https://i.imgur.com/03P5jNR.mp4#t=0.5" preload="none" muted playsinline></video><div class="vb-poster-ov"><div class="vb-poster-top"><div class="vb-poster-play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div><div class="vb-poster-bot"><div class="vb-poster-cat">IA · Reel</div><div class="vb-poster-title">I.A 04</div></div></div></div>
+          <div class="vb-poster" data-src="https://i.imgur.com/fASfECd.mp4" onclick="switchP(this)" data-hoverable><video src="https://i.imgur.com/fASfECd.mp4#t=0.5" preload="none" muted playsinline></video><div class="vb-poster-ov"><div class="vb-poster-top"><div class="vb-poster-play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div><div class="vb-poster-bot"><div class="vb-poster-cat">IA · Reel</div><div class="vb-poster-title">I.A 05</div></div></div></div>
         </div>
       </div></div>
     </div>
@@ -617,7 +622,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border);padding:32
         </div>
         <div class="vb-posters">
           <div class="vb-poster active" data-src="https://i.imgur.com/tGeJh6a.mp4" data-poster="https://i.imgur.com/1xcOQBq.png" onclick="switchP(this)" data-hoverable><img src="https://i.imgur.com/1xcOQBq.png" alt="TOTAL90" loading="lazy"><div class="vb-poster-ov"><div class="vb-poster-top"><div class="vb-poster-play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div><div class="vb-poster-bot"><div class="vb-poster-cat">Evento · 3:4</div><div class="vb-poster-title">TOTAL90</div></div></div></div>
-          <div class="vb-poster" data-src="https://i.imgur.com/8VXKHrv.mp4" data-poster="https://i.imgur.com/N6CxG42.jpeg" onclick="switchP(this)" data-hoverable><img src="https://i.imgur.com/N6CxG42.jpeg" alt="Francia 98" loading="lazy"><div class="vb-poster-ov"><div class="vb-poster-top"><div class="vb-poster-play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div><div class="vb-poster-bot"><div class="vb-poster-cat">Evento · 16:9</div><div class="vb-poster-title">Francia 98</div></div></div></div>
+          <div class="vb-poster" data-src="https://i.imgur.com/8VXKHrv.mp4" onclick="switchP(this)" data-hoverable><video src="https://i.imgur.com/8VXKHrv.mp4#t=0.5" preload="none" muted playsinline></video><div class="vb-poster-ov"><div class="vb-poster-top"><div class="vb-poster-play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div><div class="vb-poster-bot"><div class="vb-poster-cat">Evento · 16:9</div><div class="vb-poster-title">Francia 98</div></div></div></div>
         </div>
       </div></div>
     </div>
@@ -835,6 +840,7 @@ function switchReel(idx,el){
   resetReelTimer();
 }
 function nextReel(){const next=(reelIdx+1)%reelSrcs.length;switchReel(next,null)}
+function prevReel(){const prev=(reelIdx-1+reelSrcs.length)%reelSrcs.length;switchReel(prev,null)}
 function resetReelTimer(){
   clearInterval(reelTimer);reelStart=Date.now();
   if(reelFill)reelFill.style.width='0%';
@@ -846,6 +852,20 @@ function resetReelTimer(){
   },50);
 }
 if(reelVideo){reelVideo.addEventListener('canplay',()=>resetReelTimer(),{once:true})}
+
+/* ---- SHOWREEL SWIPE GESTURES ---- */
+const reelSectionBlock=document.getElementById('reel');
+if(reelSectionBlock){
+  let touchStartX=0;
+  reelSectionBlock.addEventListener('touchstart',e=>{
+    touchStartX=e.changedTouches[0].screenX;
+  },{passive:true});
+  reelSectionBlock.addEventListener('touchend',e=>{
+    const touchEndX=e.changedTouches[0].screenX;
+    if(touchEndX<touchStartX-50) nextReel();
+    if(touchEndX>touchStartX+50) prevReel();
+  },{passive:true});
+}
 
 /* ---- TICKER ---- */
 window.addEventListener('load',()=>{
@@ -863,7 +883,7 @@ window.addEventListener('load',()=>{
 document.getElementById('year').textContent=new Date().getFullYear();
 
 /* ---- MODAL ---- */
-const docs={cv:{title:'Currículum Vitae',preview:'https://drive.google.com/file/d/1GQRLykY5O4jLfdDKeYNEL7A4q6JkKjZ1/preview',drive:'https://drive.google.com/file/d/1GQRLykY5O4jLfdDKeYNEL7A4q6JkKjZ1/view?usp=drivesdk',download:'https://drive.google.com/uc?export=download&id=1GQRLykY5O4jLfdDKeYNEL7A4q6JkKjZ1'},portfolio:{title:'Portafolio Profesional',preview:'https://drive.google.com/file/d/1-5bci3cuv3_91oaJ787eDZYXmodcyOcj/preview',drive:'https://drive.google.com/file/d/1-5bci3cuv3_91oaJ787eDZYXmodcyOcj/view?usp=drivesdk',download:'https://drive.google.com/uc?export=download&id=1-5bci3cuv3_91oaJ787eDZYXmodcyOcj'}};
+const docs={cv:{title:'Currículum Vitae',preview:'https://drive.google.com/file/d/1DuxrbETu6nCn89_7qCNIp3cTBPu4FK3G/preview',drive:'https://drive.google.com/file/d/1DuxrbETu6nCn89_7qCNIp3cTBPu4FK3G/view?usp=drivesdk',download:'https://drive.google.com/uc?export=download&id=1DuxrbETu6nCn89_7qCNIp3cTBPu4FK3G'},portfolio:{title:'Portafolio Profesional',preview:'https://drive.google.com/file/d/1-5bci3cuv3_91oaJ787eDZYXmodcyOcj/preview',drive:'https://drive.google.com/file/d/1-5bci3cuv3_91oaJ787eDZYXmodcyOcj/view?usp=drivesdk',download:'https://drive.google.com/uc?export=download&id=1-5bci3cuv3_91oaJ787eDZYXmodcyOcj'}};
 const modal=document.getElementById('modal'),modalIframe=document.getElementById('modal-iframe'),modalLoader=document.getElementById('modal-loader'),modalFallback=document.getElementById('modal-fallback');
 let loaderTimeout=null,currentDoc=null;
 function openModal(t){const d=docs[t];currentDoc=t;document.getElementById('modal-title').textContent=d.title;document.getElementById('modal-download').href=d.download;document.getElementById('modal-drive').href=d.drive;document.getElementById('fallback-drive').href=d.drive;document.getElementById('fallback-download').href=d.download;modalLoader.classList.remove('hidden');modalFallback.classList.remove('show');modalIframe.style.opacity='0';modalIframe.src=d.preview;modal.classList.add('active');document.body.style.overflow='hidden';clearTimeout(loaderTimeout);loaderTimeout=setTimeout(()=>{if(!modalLoader.classList.contains('hidden'))modalFallback.classList.add('show')},7000)}
@@ -1349,6 +1369,21 @@ if(window.matchMedia("(hover:hover) and (pointer:fine)").matches){
     loadFeed();
   }
 })();
+
+/* ---- EXCLUSIVE PLAYBACK (PAUSA GLOBAL DE OTROS VIDEOS) ---- */
+document.addEventListener('play', function(e) {
+  const currentVideo = e.target;
+  // Aseguramos que el elemento sea un video y evitamos detener el showreel de fondo
+  if (!currentVideo || currentVideo.tagName !== 'VIDEO' || currentVideo.id === 'reelVideo') return;
+  
+  document.querySelectorAll('video').forEach(vid => {
+    // Pausar todos los demás videos, excepto el que acaba de iniciar y el video de fondo del showreel
+    if (vid !== currentVideo && vid.id !== 'reelVideo') {
+      vid.pause();
+    }
+  });
+}, true); // Usamos fase de captura porque el evento play no hace bubbling
+
 </script>
 </body>
 </html>
